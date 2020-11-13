@@ -16,14 +16,11 @@
  * from DesignStreaks.
  */
 
-namespace ToyRobot.Console
+namespace ToyRobot.Model
 {
-    using System;
-
-    internal class Program
+    public class Position
     {
-        private static void Main(string[] args)
-        {
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }

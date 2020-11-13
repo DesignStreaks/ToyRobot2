@@ -16,14 +16,14 @@
  * from DesignStreaks.
  */
 
-namespace ToyRobot.Console
+namespace ToyRobot.Model
 {
-    using System;
-
-    internal class Program
+    /// <summary>The valid orientations the actor can be facing.</summary>
+    public enum Orientation
     {
-        private static void Main(string[] args)
-        {
-        }
+        North,
+        South,
+        East,
+        West
     }
 }

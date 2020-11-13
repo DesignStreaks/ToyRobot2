@@ -16,14 +16,14 @@
  * from DesignStreaks.
  */
 
-namespace ToyRobot.Console
+namespace ToyRobot.Model
 {
-    using System;
-
-    internal class Program
+    public class Bearing
     {
-        private static void Main(string[] args)
-        {
-        }
+        public Orientation Orientation { get; private set; }
+
+        public Position Position { get; private set; }
+
+        
     }
 }

@@ -16,14 +16,14 @@
  * from DesignStreaks.
  */
 
-namespace ToyRobot.Console
+namespace ToyRobot.Model
 {
     using System;
 
-    internal class Program
+    public class Robot
     {
-        private static void Main(string[] args)
-        {
-        }
+        public Guid Id { get; init; }
+
+        public Bearing Bearing { get; set; }
     }
 }
