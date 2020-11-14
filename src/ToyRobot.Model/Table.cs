@@ -24,5 +24,10 @@ namespace ToyRobot.Model
     {
         public int Height { get; init; } = 5;
         public int Width { get; init; } = 5;
+
+        public Status<Table> Place(Robot robot, Bearing bearing)
+        {
+            return Status<Table>.Ok(this);
+        }
     }
 }

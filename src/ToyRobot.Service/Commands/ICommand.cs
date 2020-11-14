@@ -16,14 +16,15 @@
  * from DesignStreaks.
  */
 
-namespace ToyRobot.Model
+namespace ToyRobot.Service.Commands
 {
-    public class Bearing
+    using ToyRobot.Model;
+
+    internal interface ICommand
     {
-        public Orientation Orientation { get; init; }
-
-        public Position Position { get; init; }
-
-        
+        /// <summary>Executes the command on the scene.</summary>
+        /// <param name="scene">The scene the command is to be executed over.</param>
+        /// <returns>Status&lt;Scene&gt;.</returns>
+        Status<Scene> Execute(Scene scene);
     }
 }

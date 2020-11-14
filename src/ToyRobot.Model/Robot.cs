@@ -20,10 +20,13 @@ namespace ToyRobot.Model
 {
     using System;
 
-    public class Robot
+    public record Robot
     {
-        public Guid Id { get; init; }
+        public Robot()
+        {
+            Id = Guid.NewGuid();
+        }
 
-        public Bearing Bearing { get; set; }
+        public Guid Id { get; private set; }
     }
 }

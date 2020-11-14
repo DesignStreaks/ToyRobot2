@@ -18,12 +18,11 @@
 
 namespace ToyRobot.Model
 {
-    public class Bearing
+    using System;
+
+    public record Scene
     {
-        public Orientation Orientation { get; init; }
-
-        public Position Position { get; init; }
-
-        
+        public Robot Robot;
+        public Table Table;
     }
 }

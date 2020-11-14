@@ -19,7 +19,7 @@ namespace ToyRobot.Test.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class CalculatorFeature : object, Xunit.IClassFixture<CalculatorFeature.FixtureData>, System.IDisposable
+    public partial class NavigationFeature : object, Xunit.IClassFixture<NavigationFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace ToyRobot.Test.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "Calculator.feature"
+#line 1 "Navigation.feature"
 #line hidden
         
-        public CalculatorFeature(CalculatorFeature.FixtureData fixtureData, ToyRobot_Test_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public NavigationFeature(NavigationFeature.FixtureData fixtureData, ToyRobot_Test_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,13 +40,7 @@ namespace ToyRobot.Test.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Calculator", @"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
-	In order to avoid silly mistakes
-	As a math idiot
-	I *want* to be told the **sum** of ***two*** numbers
-
-Link to a feature: [Calculator](ToyRobot.Test/Features/Calculator.feature)
-***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Navigation", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -86,17 +80,38 @@ Link to a feature: [Calculator](ToyRobot.Test/Features/Calculator.feature)
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
-        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
-        [Xunit.TraitAttribute("Description", "Add two numbers")]
-        [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void AddTwoNumbers()
+        [Xunit.SkippableTheoryAttribute(DisplayName="Add Robot to Table")]
+        [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
+        [Xunit.TraitAttribute("Description", "Add Robot to Table")]
+        [Xunit.TraitAttribute("Category", "integration")]
+        [Xunit.InlineDataAttribute("1", "0", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("2", "0", "4", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("3", "4", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("4", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("5", "4", "4", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("6", "0", "5", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("7", "5", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("8", "-1", "2", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("9", "2", "-1", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        [Xunit.InlineDataAttribute("10", "-10", "-10", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
+        public virtual void AddRobotToTable(string id, string x, string y, string orientation, string status, string message, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] @__tags = new string[] {
+                    "integration"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, tagsOfScenario, argumentsOfScenario);
-#line 11
+            argumentsOfScenario.Add("id", id);
+            argumentsOfScenario.Add("x", x);
+            argumentsOfScenario.Add("y", y);
+            argumentsOfScenario.Add("orientation", orientation);
+            argumentsOfScenario.Add("status", status);
+            argumentsOfScenario.Add("message", message);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Robot to Table", null, tagsOfScenario, argumentsOfScenario);
+#line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -116,17 +131,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 12
- testRunner.Given("the first number is 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
- testRunner.And("the second number is 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 6
+ testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 14
- testRunner.When("the two numbers are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 7
+ testRunner.When(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
- testRunner.Then("the result should be 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 8
+ testRunner.Then(string.Format("the value of the status will be {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 9
+ testRunner.And(string.Format("the status will contain the message {0}", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -139,12 +157,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                CalculatorFeature.FeatureSetup();
+                NavigationFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                CalculatorFeature.FeatureTearDown();
+                NavigationFeature.FeatureTearDown();
             }
         }
     }
