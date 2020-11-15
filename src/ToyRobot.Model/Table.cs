@@ -50,8 +50,24 @@ namespace ToyRobot.Model
                 if (x >= this.width || y >= this.height)
                     return null;
 
-                return this.data[x + y * this.width];
+                return this.data[MapCoordsToIndex(x, y)];
             }
+        }
+
+        /// <summary>Moves the contents of the table cell defined by the <paramref name="bearing"/> 1 position forward.</summary>
+        /// <param name="bearing">The Position and Orientation of the table square to move.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<Table> Move(Bearing bearing)
+        {
+            var newBearing = bearing.Move();
+
+            if (!ValidatePosition(newBearing.Position))
+                return Status<Table>.Ok(this);
+
+            data[MapCoordsToIndex(newBearing.Position.X, newBearing.Position.Y)] = data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)];
+            data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)] = null;
+
+            return Status<Table>.Ok(this);
         }
 
         /// <summary>Places the specified robot.</summary>
@@ -60,19 +76,39 @@ namespace ToyRobot.Model
         /// <returns>The status of the command execution along with the updated table.</returns>
         public Status<Table> Place(Robot robot, Bearing bearing)
         {
-            if (bearing.Position.X < 0 || bearing.Position.X >= this.width)
+            if (!ValidatePosition(bearing.Position))
                 return Status<Table>.Ok(this);
 
-            if (bearing.Position.Y < 0 || bearing.Position.Y >= this.height)
-                return Status<Table>.Ok(this);
-
-            data[bearing.Position.X + bearing.Position.Y * this.width] = new Data
+            data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)] = new Data
             {
                 Robot = robot,
                 Orientation = bearing.Orientation
             };
 
             return Status<Table>.Ok(this);
+        }
+
+        /// <summary>Map the 2d coords to the 1d data array index.</summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>System.Int32.</returns>
+        private int MapCoordsToIndex(int x, int y)
+        {
+            return x + y * width;
+        }
+
+        /// <summary>Ensure the position falls inside the table.</summary>
+        /// <param name="position">The position.</param>
+        /// <returns>Status.</returns>
+        private Status ValidatePosition(Position position)
+        {
+            if (position.X < 0 || position.X >= this.width)
+                return Status.Error("Index out of Bounds");
+
+            if (position.Y < 0 || position.Y >= this.height)
+                return Status.Error("Index out of Bounds");
+
+            return Status.Ok();
         }
 
         public record Data

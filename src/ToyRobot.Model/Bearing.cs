@@ -18,12 +18,37 @@
 
 namespace ToyRobot.Model
 {
+    using System;
+
     public record Bearing
     {
         public Orientation Orientation { get; init; }
 
         public Position Position { get; init; }
 
-        
+        /// <summary>Returns a new Bearing with the position incremented by 1 unit in the diretion of the orientation.</summary>
+        public Bearing Move()
+        {
+            Bearing newBearing = null;
+
+            switch (Orientation)
+            {
+                case Orientation.North:
+                    newBearing = this with { Position = this.Position with { Y = this.Position.Y + 1 } };
+                    break;
+                case Orientation.South:
+                    newBearing = this with { Position = this.Position with { Y = this.Position.Y - 1 } };
+                    break;
+                case Orientation.East:
+                    newBearing = this with { Position = this.Position with { X = this.Position.X + 1 } };
+                    break;
+                case Orientation.West:
+                    newBearing = this with { Position = this.Position with { X = this.Position.X - 1 } };
+                    break;
+            }
+
+            return newBearing;
+
+        }
     }
 }

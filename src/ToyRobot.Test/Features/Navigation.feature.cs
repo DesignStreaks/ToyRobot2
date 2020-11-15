@@ -154,6 +154,91 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableTheoryAttribute(DisplayName="Move Robot around Table")]
+        [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
+        [Xunit.TraitAttribute("Description", "Move Robot around Table")]
+        [Xunit.InlineDataAttribute("1.1", "2", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", "2", "1", new string[0])]
+        [Xunit.InlineDataAttribute("1.2", "2", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", "2", "4", new string[0])]
+        [Xunit.InlineDataAttribute("1.3", "4", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", "4", "3", new string[0])]
+        [Xunit.InlineDataAttribute("1.4", "0", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", "0", "3", new string[0])]
+        [Xunit.InlineDataAttribute("1.5", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", "2", "3", new string[0])]
+        [Xunit.InlineDataAttribute("2.1", "2", "0", "\"South\"", "\"Ok\"", "\"Ok\"", "\"false\"", "2", "0", new string[0])]
+        [Xunit.InlineDataAttribute("2.2", "2", "4", "\"South\"", "\"Ok\"", "\"Ok\"", "\"true\"", "2", "3", new string[0])]
+        [Xunit.InlineDataAttribute("2.3", "4", "2", "\"South\"", "\"Ok\"", "\"Ok\"", "\"true\"", "4", "1", new string[0])]
+        [Xunit.InlineDataAttribute("2.4", "0", "2", "\"South\"", "\"Ok\"", "\"Ok\"", "\"true\"", "0", "1", new string[0])]
+        [Xunit.InlineDataAttribute("2.5", "2", "2", "\"South\"", "\"Ok\"", "\"Ok\"", "\"true\"", "2", "1", new string[0])]
+        [Xunit.InlineDataAttribute("3.1", "2", "0", "\"East\"", "\"Ok\"", "\"Ok\"", "\"true\"", "3", "0", new string[0])]
+        [Xunit.InlineDataAttribute("3.2", "2", "4", "\"East\"", "\"Ok\"", "\"Ok\"", "\"true\"", "3", "4", new string[0])]
+        [Xunit.InlineDataAttribute("3.3", "4", "2", "\"East\"", "\"Ok\"", "\"Ok\"", "\"false\"", "4", "2", new string[0])]
+        [Xunit.InlineDataAttribute("3.4", "0", "2", "\"East\"", "\"Ok\"", "\"Ok\"", "\"true\"", "1", "2", new string[0])]
+        [Xunit.InlineDataAttribute("3.5", "2", "2", "\"East\"", "\"Ok\"", "\"Ok\"", "\"true\"", "3", "2", new string[0])]
+        [Xunit.InlineDataAttribute("4.1", "2", "0", "\"West\"", "\"Ok\"", "\"Ok\"", "\"true\"", "1", "0", new string[0])]
+        [Xunit.InlineDataAttribute("4.2", "2", "4", "\"West\"", "\"Ok\"", "\"Ok\"", "\"true\"", "1", "4", new string[0])]
+        [Xunit.InlineDataAttribute("4.3", "4", "2", "\"West\"", "\"Ok\"", "\"Ok\"", "\"true\"", "3", "2", new string[0])]
+        [Xunit.InlineDataAttribute("4.4", "0", "2", "\"West\"", "\"Ok\"", "\"Ok\"", "\"false\"", "0", "2", new string[0])]
+        [Xunit.InlineDataAttribute("4.5", "2", "2", "\"West\"", "\"Ok\"", "\"Ok\"", "\"true\"", "1", "2", new string[0])]
+        public virtual void MoveRobotAroundTable(string id, string x, string y, string orientation, string status, string message, string has_Moved, string result_X, string result_Y, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("id", id);
+            argumentsOfScenario.Add("x", x);
+            argumentsOfScenario.Add("y", y);
+            argumentsOfScenario.Add("orientation", orientation);
+            argumentsOfScenario.Add("status", status);
+            argumentsOfScenario.Add("message", message);
+            argumentsOfScenario.Add("has_moved", has_Moved);
+            argumentsOfScenario.Add("result_x", result_X);
+            argumentsOfScenario.Add("result_y", result_Y);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Move Robot around Table", null, tagsOfScenario, argumentsOfScenario);
+#line 25
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 26
+ testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 27
+ testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 28
+ testRunner.When(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 29
+ testRunner.And("I move the robot forward", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.Then(string.Format("the value of the status will be {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 31
+ testRunner.And(string.Format("the status will contain the message {0}", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 32
+ testRunner.And(string.Format("the robot {0} on the table to {1} and {2}", has_Moved, result_X, result_Y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 33
+ testRunner.And(string.Format("the robot {0} and the original coordinate {1} and {2} are null", has_Moved, x, y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable
