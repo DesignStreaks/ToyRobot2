@@ -24,12 +24,12 @@ namespace ToyRobot.Test.Steps
             scene.Robot = new Model.Robot();
             this.scenarioContext.Set(scene, "scene");
         }
-        
+
         [Given(@"I have a table of height (.*) and width (.*)")]
         public void GivenIHaveATableOfHeightAndWidth(int height, int width)
         {
             var scene = scenarioContext.Get<Scene>("scene");
-            scene.Table = new Model.Table { Height = height, Width = width };
+            scene.Table = new Model.Table(height, width);
 
             this.scenarioContext.Set(scene, "scene");
         }
@@ -41,11 +41,7 @@ namespace ToyRobot.Test.Steps
             var bearing = new Bearing
             {
                 Orientation = orientation.ToEnum<Orientation>(),
-                Position = new Position
-                {
-                    X = x,
-                    Y = y
-                }
+                Position = new Position(x, y)
             };
             var status = new PlaceCommand(bearing).Execute(scene);
             this.scenarioContext.Set(status, "status");
@@ -65,5 +61,40 @@ namespace ToyRobot.Test.Steps
             var status = this.scenarioContext.Get<Status<Scene>>("status");
             Assert.Equal(message, status.Message);
         }
+
+        [Then(@"the rrobot will be at (.*) and (.*) facing ""(.*)""")]
+        public void ThenTheRrobotWillBeAtAndFacing(int x, int y, string orientation)
+        {
+            var scene = this.scenarioContext.Get<Scene>("scene");
+            var table = scene.Table;
+
+            var data = table[x, y];
+
+            Assert.NotNull(data.Robot);
+            Assert.Equal(data.Robot.Id, scene.Robot.Id);
+            Assert.Equal(data.Orientation, orientation.ToEnum<Orientation>());
+        }
+
+        [Then(@"the robot ""(.*)"" to the table at (.*) and (.*)")]
+        public void ThenTheRobotToTheTableAtAnd(string is_added, int result_x, int result_y)
+        {
+            var scene = this.scenarioContext.Get<Scene>("scene");
+            var table = scene.Table;
+            var data = table[result_x, result_y];
+
+            _ = bool.TryParse(is_added, out var result);
+            if (result)
+            {
+                Assert.NotNull(data.Robot);
+                Assert.Equal(data.Robot.Id, scene.Robot.Id);
+            }
+            else
+            {
+                Assert.Null(data);
+            }
+        }
+
+
+
     }
 }

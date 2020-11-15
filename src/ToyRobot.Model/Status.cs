@@ -19,7 +19,7 @@ namespace ToyRobot.Model
     using System.Diagnostics;
 
     /// <summary>Status class used to return the status of an operation.</summary>
-    public class Status
+    public record Status
     {
         /// <summary>The state values for the <see cref="Status" /> class.</summary>
         public enum States
@@ -94,7 +94,7 @@ namespace ToyRobot.Model
     /// <summary>Status class containing a data payload used to return the status of an operation.</summary>
     /// <typeparam name="T">The data type of the data payload.</typeparam>
     /// <seealso cref="ToyRobot.Library.Status" />
-    public class Status<T> : Status
+    public record Status<T> : Status
     {
         /// <summary>The data payload of the this <see cref="Status{T}" /> instance.</summary>
         /// <value>The data.</value>
