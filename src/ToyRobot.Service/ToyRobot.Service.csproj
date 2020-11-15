@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToyRobot.Core\ToyRobot.Core.csproj" />
     <ProjectReference Include="..\ToyRobot.Model\ToyRobot.Model.csproj" />
   </ItemGroup>
 

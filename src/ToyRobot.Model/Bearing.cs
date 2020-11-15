@@ -18,7 +18,7 @@
 
 namespace ToyRobot.Model
 {
-    public class Bearing
+    public record Bearing
     {
         public Orientation Orientation { get; init; }
 

@@ -84,17 +84,17 @@ namespace ToyRobot.Test.Features
         [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
         [Xunit.TraitAttribute("Description", "Add Robot to Table")]
         [Xunit.TraitAttribute("Category", "integration")]
-        [Xunit.InlineDataAttribute("1", "0", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("2", "0", "4", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("3", "4", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("4", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("5", "4", "4", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("6", "0", "5", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("7", "5", "0", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("8", "-1", "2", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("9", "2", "-1", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        [Xunit.InlineDataAttribute("10", "-10", "-10", "\"North\"", "\"Ok\"", "\"Ok\"", new string[0])]
-        public virtual void AddRobotToTable(string id, string x, string y, string orientation, string status, string message, string[] exampleTags)
+        [Xunit.InlineDataAttribute("1", "0", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", new string[0])]
+        [Xunit.InlineDataAttribute("2", "0", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", new string[0])]
+        [Xunit.InlineDataAttribute("3", "4", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", new string[0])]
+        [Xunit.InlineDataAttribute("4", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", new string[0])]
+        [Xunit.InlineDataAttribute("5", "4", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"true\"", new string[0])]
+        [Xunit.InlineDataAttribute("6", "0", "5", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", new string[0])]
+        [Xunit.InlineDataAttribute("7", "5", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", new string[0])]
+        [Xunit.InlineDataAttribute("8", "-1", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", new string[0])]
+        [Xunit.InlineDataAttribute("9", "2", "-1", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", new string[0])]
+        [Xunit.InlineDataAttribute("10", "-10", "-10", "\"North\"", "\"Ok\"", "\"Ok\"", "\"false\"", new string[0])]
+        public virtual void AddRobotToTable(string id, string x, string y, string orientation, string status, string message, string is_Added, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "integration"};
@@ -110,6 +110,7 @@ namespace ToyRobot.Test.Features
             argumentsOfScenario.Add("orientation", orientation);
             argumentsOfScenario.Add("status", status);
             argumentsOfScenario.Add("message", message);
+            argumentsOfScenario.Add("is_added", is_Added);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Robot to Table", null, tagsOfScenario, argumentsOfScenario);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
@@ -145,6 +146,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 9
  testRunner.And(string.Format("the status will contain the message {0}", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 10
+ testRunner.And(string.Format("the robot {0} to the table at {1} and {2}", is_Added, x, y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -40,13 +40,16 @@ namespace ToyRobot.Service.Commands
         /// <returns>The status of the command execution along with the updated scene.</returns>
         public Status<Scene> Execute(Scene scene)
         {
+            if (scene is null)
+                return Status<Scene>.Error("Scene not defined", scene);
+
             if (scene.Table is null)
                 return Status<Scene>.Error("Table not defined", scene);
 
             if (scene.Robot is null)
                 return Status<Scene>.Error("Robot not defined", scene);
-
-            var newTable = scene.Table;
+            
+            var newTable = scene.Table.Copy();
 
             var status = newTable.Place(scene.Robot, bearing);
 

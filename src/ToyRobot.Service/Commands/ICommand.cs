@@ -24,7 +24,7 @@ namespace ToyRobot.Service.Commands
     {
         /// <summary>Executes the command on the scene.</summary>
         /// <param name="scene">The scene the command is to be executed over.</param>
-        /// <returns>Status&lt;Scene&gt;.</returns>
+        /// <returns>The status of the command execution along with the updated scene.</returns>
         Status<Scene> Execute(Scene scene);
     }
 }
