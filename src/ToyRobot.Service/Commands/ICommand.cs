@@ -22,9 +22,9 @@ namespace ToyRobot.Service.Commands
 
     internal interface ICommand<T>
     {
-        /// <summary>Executes the command on the scene.</summary>
-        /// <param name="scene">The scene the command is to be executed over.</param>
-        /// <returns>The status of the command execution along with the updated scene.</returns>
-        Status<T> Execute(Scene scene);
+        /// <summary>Executes the command on the table.</summary>
+        /// <param name="table">The table the command is to be executed over.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        Status<T> Execute(Table table);
     }
 }

@@ -26,12 +26,27 @@ namespace ToyRobot.Service.Commands
     /// <see cref="ToyRobot.Service.Commands.ICommand" />
     public class ReportCommand : ICommand<string>
     {
-        /// <summary>Executes the command on the scene.</summary>
-        /// <param name="scene">The scene the command is to be executed over.</param>
-        /// <returns>The status of the command execution along with the updated scene.</returns>
-        public Status<string> Execute(Scene scene)
+        private readonly Robot robot;
+
+        /// <summary>Initializes a new instance of the <see cref="ReportCommand"/> class.</summary>
+        /// <param name="robot">The robot to execute the command for.</param>
+        public ReportCommand(Robot robot)
         {
-            var data = scene.Table[scene.Robot.Id];
+            this.robot = robot;
+        }
+
+        /// <summary>Executes the command on the table.</summary>
+        /// <param name="table">The table the command is to be executed over.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<string> Execute(Table table)
+        {
+            if (table is null)
+                return Status<string>.Error("Table not defined", string.Empty);
+
+            if (robot is null)
+                return Status<string>.Error("Robot not defined", string.Empty);
+
+            var data = table[robot.Id];
 
             return data is not null
                 ? Status<string>.Ok($"{data.Bearing.Position.X},{data.Bearing.Position.Y},{data.Bearing.Orientation}")

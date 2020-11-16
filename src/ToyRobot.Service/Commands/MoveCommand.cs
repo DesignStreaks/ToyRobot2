@@ -24,38 +24,36 @@ namespace ToyRobot.Service.Commands
     /// <summary>Command to move the contents of a table cell.</summary>
     /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
     /// <see cref="ToyRobot.Service.Commands.ICommand" />
-    public class MoveCommand : ICommand<Scene>
+    public class MoveCommand : ICommand<Table>
     {
-        private readonly Bearing bearing;
+        private readonly Robot robot;
 
         /// <summary>Initializes a new instance of the <see cref="MoveCommand"/> class.</summary>
-        /// <param name="bearing">The bearing.</param>
-        public MoveCommand(Bearing bearing)
+        /// <param name="robot">The robot to execute the command for.</param>
+        public MoveCommand(Robot robot)
         {
-            this.bearing = bearing;
+            this.robot = robot;
         }
 
-        /// <summary>Executes the command on the scene.</summary>
-        /// <param name="scene">The scene the command is to be executed over.</param>
-        /// <returns>The status of the command execution along with the updated scene.</returns>
-        public Status<Scene> Execute(Scene scene)
+        /// <summary>Executes the command on the table.</summary>
+        /// <param name="table">The table the command is to be executed over.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<Table> Execute(Table table)
         {
-            if (scene is null)
-                return Status<Scene>.Error("Scene not defined", scene);
 
-            if (scene.Table is null)
-                return Status<Scene>.Error("Table not defined", scene);
+            if (table is null)
+                return Status<Table>.Error("Table not defined", table);
 
-            if (scene.Robot is null)
-                return Status<Scene>.Error("Robot not defined", scene);
+            if (robot is null)
+                return Status<Table>.Error("Robot not defined", table);
 
-            var newTable = scene.Table.Copy();
+            var newTable = table.Copy();
 
-            var status = newTable.Move(scene.Robot);
+            var status = newTable.Move(robot);
 
             return status
-                ? Status<Scene>.Ok(scene with { Table = status.Data })
-                : Status<Scene>.Error(status.Message, scene);
+                ? Status<Table>.Ok(status.Data)
+                : Status<Table>.Error(status.Message, table);
         }
     }
 }

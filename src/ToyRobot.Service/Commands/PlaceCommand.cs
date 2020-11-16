@@ -24,38 +24,41 @@ namespace ToyRobot.Service.Commands
     /// <summary>Command to place the robot on the table.</summary>
     /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
     /// <see cref="ToyRobot.Service.Commands.ICommand" />
-    public class PlaceCommand : ICommand<Scene>
+    public class PlaceCommand : ICommand<Table>
     {
+        private readonly Robot robot;
         private readonly Bearing bearing;
 
-        /// <summary>Initializes a new instance of the <see cref="PlaceCommand"/> class.</summary>
-        /// <param name="bearing">The bearing of the toy robot.</param>
-        public PlaceCommand(Bearing bearing)
+        /// <summary>Initializes a new instance of the <see cref="PlaceCommand" /> class.</summary>
+        /// <param name="robot">The robot to execute the command for.</param>
+        /// <param name="bearing">The bearing of the robot.</param>
+        public PlaceCommand(Robot robot, Bearing bearing)
         {
+            this.robot = robot;
             this.bearing = bearing;
         }
 
-        /// <summary>Executes the command on the scene.</summary>
-        /// <param name="scene">The scene the command is to be executed over.</param>
-        /// <returns>The status of the command execution along with the updated scene.</returns>
-        public Status<Scene> Execute(Scene scene)
+        /// <summary>Executes the command on the table.</summary>
+        /// <param name="table">The table the command is to be executed over.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<Table> Execute(Table table)
         {
-            if (scene is null)
-                return Status<Scene>.Error("Scene not defined", scene);
+            if (table is null)
+                return Status<Table>.Error("Table not defined", table);
 
-            if (scene.Table is null)
-                return Status<Scene>.Error("Table not defined", scene);
+            if (robot is null)
+                return Status<Table>.Error("Robot not defined", table);
 
-            if (scene.Robot is null)
-                return Status<Scene>.Error("Robot not defined", scene);
-            
-            var newTable = scene.Table.Copy();
+            if (bearing is null)
+                return Status<Table>.Error("Bearing not defined", table);
 
-            var status = newTable.Place(scene.Robot, bearing);
+            var newTable = table.Copy();
+
+            var status = newTable.Place(robot, bearing);
 
             return status
-                ? Status<Scene>.Ok(scene with { Table = status.Data })
-                : Status<Scene>.Error(status.Message, scene);
+                ? Status<Table>.Ok(newTable)
+                : Status<Table>.Error(status.Message, table);
         }
     }
 }
