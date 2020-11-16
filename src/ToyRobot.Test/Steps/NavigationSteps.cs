@@ -130,6 +130,23 @@ namespace ToyRobot.Test.Steps
             }
         }
 
+        [When(@"I Report the Robot Position")]
+        public void WhenIReportTheRobotPosition()
+        {
+            var scene = this.scenarioContext.Get<Scene>("scene");
+            var status = new ReportCommand().Execute(scene);
+
+            this.scenarioContext.Set(status, "status");
+            this.scenarioContext.Set(status.Data, "report");
+        }
+
+        [Then(@"the report returns ""(.*)""")]
+        public void ThenTheReportReturns(string report)
+        {
+            var data = this.scenarioContext.Get<string>("report");
+            Assert.Equal(report, data);
+        }
+
 
 
 

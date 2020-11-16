@@ -20,11 +20,11 @@ namespace ToyRobot.Service.Commands
 {
     using ToyRobot.Model;
 
-    internal interface ICommand
+    internal interface ICommand<T>
     {
         /// <summary>Executes the command on the scene.</summary>
         /// <param name="scene">The scene the command is to be executed over.</param>
         /// <returns>The status of the command execution along with the updated scene.</returns>
-        Status<Scene> Execute(Scene scene);
+        Status<T> Execute(Scene scene);
     }
 }

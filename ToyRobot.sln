@@ -7,11 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Console", "src\Toy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Test", "src\ToyRobot.Test\ToyRobot.Test.csproj", "{4A8E3B60-E625-443E-B883-5ACC427CB868}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.Model", "src\ToyRobot.Model\ToyRobot.Model.csproj", "{0920FA26-E7AE-46C7-B696-0A10CE02B949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Model", "src\ToyRobot.Model\ToyRobot.Model.csproj", "{0920FA26-E7AE-46C7-B696-0A10CE02B949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.Service", "src\ToyRobot.Service\ToyRobot.Service.csproj", "{6EC364B1-0BC7-4C25-A006-99AB9C12C765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Service", "src\ToyRobot.Service\ToyRobot.Service.csproj", "{6EC364B1-0BC7-4C25-A006-99AB9C12C765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.Core", "src\ToyRobot.Core\ToyRobot.Core.csproj", "{B32906F9-2BA5-475C-A38E-F7FBC23612C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Core", "src\ToyRobot.Core\ToyRobot.Core.csproj", "{B32906F9-2BA5-475C-A38E-F7FBC23612C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20AFC30E-63FD-443A-B5A6-E4CAA70E295E}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

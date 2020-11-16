@@ -24,7 +24,7 @@ namespace ToyRobot.Service.Commands
     /// <summary>Command to place the robot on the table.</summary>
     /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
     /// <see cref="ToyRobot.Service.Commands.ICommand" />
-    public class PlaceCommand : ICommand
+    public class PlaceCommand : ICommand<Scene>
     {
         private readonly Bearing bearing;
 

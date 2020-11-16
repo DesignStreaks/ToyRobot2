@@ -21,41 +21,21 @@ namespace ToyRobot.Service.Commands
     using System;
     using ToyRobot.Model;
 
-    /// <summary>Command to move the contents of a table cell.</summary>
+    /// <summary>Command to report on the robot on the table.</summary>
     /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
     /// <see cref="ToyRobot.Service.Commands.ICommand" />
-    public class MoveCommand : ICommand<Scene>
+    public class ReportCommand : ICommand<string>
     {
-        private readonly Bearing bearing;
-
-        /// <summary>Initializes a new instance of the <see cref="MoveCommand"/> class.</summary>
-        /// <param name="bearing">The bearing.</param>
-        public MoveCommand(Bearing bearing)
-        {
-            this.bearing = bearing;
-        }
-
         /// <summary>Executes the command on the scene.</summary>
         /// <param name="scene">The scene the command is to be executed over.</param>
         /// <returns>The status of the command execution along with the updated scene.</returns>
-        public Status<Scene> Execute(Scene scene)
+        public Status<string> Execute(Scene scene)
         {
-            if (scene is null)
-                return Status<Scene>.Error("Scene not defined", scene);
+            var data = scene.Table[scene.Robot.Id];
 
-            if (scene.Table is null)
-                return Status<Scene>.Error("Table not defined", scene);
-
-            if (scene.Robot is null)
-                return Status<Scene>.Error("Robot not defined", scene);
-
-            var newTable = scene.Table.Copy();
-
-            var status = newTable.Move(scene.Robot);
-
-            return status
-                ? Status<Scene>.Ok(scene with { Table = status.Data })
-                : Status<Scene>.Error(status.Message, scene);
+            return data is not null
+                ? Status<string>.Ok($"{data.Bearing.Position.X},{data.Bearing.Position.Y},{data.Bearing.Orientation}")
+                : Status<string>.Ok(string.Empty);
         }
     }
 }
