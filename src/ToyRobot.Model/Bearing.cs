@@ -20,6 +20,7 @@ namespace ToyRobot.Model
 {
     using System;
 
+    /// <summary>Representation of a Position and Orientation</summary>
     public record Bearing
     {
         public Orientation Orientation { get; init; }
@@ -29,26 +30,14 @@ namespace ToyRobot.Model
         /// <summary>Returns a new Bearing with the position incremented by 1 unit in the diretion of the orientation.</summary>
         public Bearing Move()
         {
-            Bearing newBearing = null;
-
-            switch (Orientation)
+            return Orientation switch
             {
-                case Orientation.North:
-                    newBearing = this with { Position = this.Position with { Y = this.Position.Y + 1 } };
-                    break;
-                case Orientation.South:
-                    newBearing = this with { Position = this.Position with { Y = this.Position.Y - 1 } };
-                    break;
-                case Orientation.East:
-                    newBearing = this with { Position = this.Position with { X = this.Position.X + 1 } };
-                    break;
-                case Orientation.West:
-                    newBearing = this with { Position = this.Position with { X = this.Position.X - 1 } };
-                    break;
-            }
-
-            return newBearing;
-
+                Orientation.North => this with { Position = this.Position with { Y = this.Position.Y + 1 } },
+                Orientation.South => this with { Position = this.Position with { Y = this.Position.Y - 1 } },
+                Orientation.East => this with { Position = this.Position with { X = this.Position.X + 1 } },
+                Orientation.West => this with { Position = this.Position with { X = this.Position.X - 1 } },
+                _ => this.Copy()
+            };
         }
     }
 }

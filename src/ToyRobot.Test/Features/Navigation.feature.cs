@@ -232,9 +232,6 @@ this.ScenarioInitialize(scenarioInfo);
 #line 32
  testRunner.And(string.Format("the robot {0} on the table to {1} and {2}", has_Moved, result_X, result_Y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 33
- testRunner.And(string.Format("the robot {0} and the original coordinate {1} and {2} are null", has_Moved, x, y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
             }
             this.ScenarioCleanup();
         }

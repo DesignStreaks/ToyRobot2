@@ -51,7 +51,7 @@ namespace ToyRobot.Service.Commands
 
             var newTable = scene.Table.Copy();
 
-            var status = newTable.Move(bearing);
+            var status = newTable.Move(scene.Robot);
 
             return status
                 ? Status<Scene>.Ok(scene with { Table = status.Data })

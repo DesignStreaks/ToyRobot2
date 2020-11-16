@@ -69,11 +69,11 @@ namespace ToyRobot.Test.Steps
             var scene = this.scenarioContext.Get<Scene>("scene");
             var table = scene.Table;
 
-            var data = table[x, y];
+            var data = table[scene.Robot.Id];
 
             Assert.NotNull(data.Robot);
             Assert.Equal(data.Robot.Id, scene.Robot.Id);
-            Assert.Equal(data.Orientation, orientation.ToEnum<Orientation>());
+            Assert.Equal(data.Bearing.Orientation, orientation.ToEnum<Orientation>());
         }
 
         [Then(@"the robot ""(.*)"" to the table at (.*) and (.*)")]
@@ -81,7 +81,7 @@ namespace ToyRobot.Test.Steps
         {
             var scene = this.scenarioContext.Get<Scene>("scene");
             var table = scene.Table;
-            var data = table[result_x, result_y];
+            var data = table[scene.Robot.Id];
 
             _ = bool.TryParse(is_added, out var result);
             if (result)
@@ -112,7 +112,7 @@ namespace ToyRobot.Test.Steps
         {
             var scene = this.scenarioContext.Get<Scene>("scene");
             var table = scene.Table;
-            var data = table[result_x, result_y];
+            var data = table[scene.Robot.Id];
 
             _ = bool.TryParse(has_moved, out var result);
             if (result)
@@ -130,30 +130,8 @@ namespace ToyRobot.Test.Steps
             }
         }
 
-        [Then(@"the robot ""(.*)"" and the original coordinate (.*) and (.*) are null")]
-        public void ThenTheRobotAndTheOriginalCoordinateAndAreNull(string has_moved, int x, int y)
-        {
-            var scene = this.scenarioContext.Get<Scene>("scene");
-            var table = scene.Table;
-            var data = table[x, y];
 
-            _ = bool.TryParse(has_moved, out var result);
-            if (result)
-            {
-                Assert.Null(data);
-            }
-            else
-            {
-                Assert.NotNull(data.Robot);
-                Assert.Equal(data.Robot.Id, scene.Robot.Id);
-            }
-        }
 
-        //[Then(@"the original coordinate (.*) and (.*) are null")]
-        //public void ThenTheOriginalCoordinateAndAreNull(int x, int y)
-        //{
-        //    ScenarioContext.Current.Pending();
-        //}
 
 
     }

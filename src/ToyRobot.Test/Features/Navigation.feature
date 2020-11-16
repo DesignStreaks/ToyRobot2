@@ -30,7 +30,6 @@ Scenario Outline: Move Robot around Table
 	Then the value of the status will be <status>
 	And the status will contain the message <message>
 	And the robot <has_moved> on the table to <result_x> and <result_y>
-	And the robot <has_moved> and the original coordinate <x> and <y> are null
 
 	Examples:
 		| id  | x | y | orientation | status | message | has_moved | result_x | result_y |

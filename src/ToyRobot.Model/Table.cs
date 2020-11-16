@@ -19,10 +19,11 @@
 namespace ToyRobot.Model
 {
     using System;
+    using System.Collections.Generic;
 
     public class Table
     {
-        private readonly Data[] data;
+        private readonly Dictionary<Guid, Data> data;
         private readonly int height;
         private readonly int width;
 
@@ -33,44 +34,48 @@ namespace ToyRobot.Model
         {
             this.width = width;
             this.height = height;
-            this.data = new Data[width * height];
+
+            this.data = new Dictionary<Guid, Data>();
         }
 
-        /// <summary>Gets the <see cref="Data"/> at the specified <paramref name="x"/> and <paramref name="y"/> coordinate.</summary>
+        /// <summary>Gets the <see cref="Data"/> for the specified robot id.</summary>
         /// <param name="x">The x coordinate of the table to retrieve.</param>
         /// <param name="y">The y coordinate of the table to retrieve.</param>
-        /// <returns>The data located at the <paramref name="x"/> and <paramref name="y"/> coordinates.</returns>
-        public Data this[int x, int y]
+        /// <returns>The data for the specified robot id.</returns>
+        public Data this[Guid id]
         {
             get
             {
-                if (x < 0 || y < 0)
-                    return null;
-
-                if (x >= this.width || y >= this.height)
-                    return null;
-
-                return this.data[MapCoordsToIndex(x, y)];
+                return this.data.ContainsKey(id)
+                    ? this.data[id]
+                    : null;
             }
         }
 
-        /// <summary>Moves the contents of the table cell defined by the <paramref name="bearing"/> 1 position forward.</summary>
+        /// <summary>Moves the robot 1 position forward.</summary>
         /// <param name="bearing">The Position and Orientation of the table square to move.</param>
         /// <returns>The status of the command execution along with the updated table.</returns>
-        public Status<Table> Move(Bearing bearing)
+        public Status<Table> Move(Robot robot)
         {
-            var newBearing = bearing.Move();
+            if (!this.data.ContainsKey(robot.Id))
+                return Status<Table>.Error("Robot cannot be moved", this);
+
+            var data = this.data[robot.Id];
+            var newBearing = data.Bearing.Move();
 
             if (!ValidatePosition(newBearing.Position))
                 return Status<Table>.Ok(this);
 
-            data[MapCoordsToIndex(newBearing.Position.X, newBearing.Position.Y)] = data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)];
-            data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)] = null;
+            this.data[robot.Id] = new Data
+            {
+                Robot = robot,
+                Bearing = newBearing
+            };
 
             return Status<Table>.Ok(this);
         }
 
-        /// <summary>Places the specified robot.</summary>
+        /// <summary>Places the specified <paramref name="robot"/>.</summary>
         /// <param name="robot">The robot.</param>
         /// <param name="bearing">The bearing.</param>
         /// <returns>The status of the command execution along with the updated table.</returns>
@@ -79,22 +84,13 @@ namespace ToyRobot.Model
             if (!ValidatePosition(bearing.Position))
                 return Status<Table>.Ok(this);
 
-            data[MapCoordsToIndex(bearing.Position.X, bearing.Position.Y)] = new Data
+            this.data[robot.Id] = new Data
             {
                 Robot = robot,
-                Orientation = bearing.Orientation
+                Bearing = bearing
             };
 
             return Status<Table>.Ok(this);
-        }
-
-        /// <summary>Map the 2d coords to the 1d data array index.</summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        /// <returns>System.Int32.</returns>
-        private int MapCoordsToIndex(int x, int y)
-        {
-            return x + y * width;
         }
 
         /// <summary>Ensure the position falls inside the table.</summary>
@@ -111,10 +107,12 @@ namespace ToyRobot.Model
             return Status.Ok();
         }
 
+        /// <summary>Internal table structure</summary>
+        /// <value>The data.</value>
         public record Data
         {
             public Robot Robot;
-            public Orientation Orientation;
+            public Bearing Bearing;
         }
     }
 }
