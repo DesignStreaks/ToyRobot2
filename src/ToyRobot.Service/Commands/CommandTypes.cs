@@ -18,13 +18,15 @@
 
 namespace ToyRobot.Service.Commands
 {
-    using ToyRobot.Model;
+    using System;
 
-    public interface ICommand<T>
+    public enum CommandTypes
     {
-        /// <summary>Executes the command on the table.</summary>
-        /// <param name="table">The table the command is to be executed over.</param>
-        /// <returns>The status of the command execution along with the updated table.</returns>
-        Status<T> Execute(Table table);
+        Undefined = 0x0,
+        Place = 0x1,
+        Move = 0x2,
+        Report = 0x4,
+        Left = 0x8,
+        Right = 0x10
     }
 }

@@ -4,12 +4,14 @@ namespace System
 {
     using System.ArrayExtensions;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     namespace ArrayExtensions
     {
         public static class ArrayExtensions
         {
+            [DebuggerHidden]
             public static void ForEach(this Array array, Action<Array, int[]> action)
             {
                 if (array.LongLength == 0)
@@ -67,6 +69,7 @@ namespace System
         /// <typeparam name="T"></typeparam>
         /// <param name="original">The original object to copy.</param>
         /// <returns>A deep copy of the original object.</returns>
+        [DebuggerHidden]
         public static T Copy<T>(this T original)
         {
             return (T)Copy((Object)original);
@@ -75,6 +78,7 @@ namespace System
         /// <summary>Perform a deep copy of an object.</summary>
         /// <param name="originalObject">The original object to copy.</param>
         /// <returns>A deep copy of the original object.</returns>
+        [DebuggerHidden]
         public static Object Copy(this Object originalObject)
         {
             return InternalCopy(originalObject, new Dictionary<Object, Object>(new ReferenceEqualityComparer()));
@@ -83,6 +87,7 @@ namespace System
         /// <summary>Gets a value indicating whether the System.Type is one of the primitive types.</summary>
         /// <param name="type">The type.</param>
         /// <returns><c>true</c>if the System.Type is one of the primitive types; otherwise, <c>false</c>.</returns>
+        [DebuggerHidden]
         public static bool IsPrimitive(this Type type)
         {
             if (type == typeof(String))
@@ -143,11 +148,13 @@ namespace System
 
     public class ReferenceEqualityComparer : EqualityComparer<Object>
     {
+        [DebuggerHidden]
         public override bool Equals(object x, object y)
         {
             return ReferenceEquals(x, y);
         }
 
+        [DebuggerHidden]
         public override int GetHashCode(object obj)
         {
             if (obj == null)

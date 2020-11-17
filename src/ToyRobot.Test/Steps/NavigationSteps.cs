@@ -1,12 +1,30 @@
-﻿using System;
-using TechTalk.SpecFlow;
-using ToyRobot.Model;
-using ToyRobot.Service.Commands;
-using Xunit;
-using Table = ToyRobot.Model.Table;
+﻿/*
+ * DESIGNSTREAKS CONFIDENTIAL
+ * __________________
+ *
+ *  Copyright © DesignStreaks - 2010 - 2020
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of DesignStreaks and its suppliers, if any.
+ * The intellectual and technical concepts contained
+ * herein are proprietary to DesignStreaks and its suppliers and may
+ * be covered by Australian, U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from DesignStreaks.
+ */
 
 namespace ToyRobot.Test.Steps
 {
+    using System;
+    using TechTalk.SpecFlow;
+    using ToyRobot.Model;
+    using ToyRobot.Service.Commands;
+    using Xunit;
+    using Table = Model.Table;
+
     [Binding, Scope(Feature = "Navigation")]
     public class NavigationSteps
     {
@@ -151,6 +169,27 @@ namespace ToyRobot.Test.Steps
             Assert.Equal(report, data);
         }
 
+        [When(@"I turn the robot ""(.*)""")]
+        public void WhenITurnTheRobot(string direction)
+        {
+            var robot = scenarioContext.Get<Robot>("robot");
+            var table = scenarioContext.Get<Table>("table");
+            var status = new TurnCommand(robot, direction.ToEnum<Direction>()).Execute(table);
+
+            this.scenarioContext.Set(status, "status");
+            this.scenarioContext.Set(status.Data, "table");
+        }
+
+        [Then(@"the robot is on the table at (.*) and (.*) facing ""(.*)""")]
+        public void ThenTheRobotIsOnTheTableAtAndFacing(int result_x, int result_y, string result_orientation)
+        {
+            var status = scenarioContext.Get<Status<Table>>("status");
+            var robot = scenarioContext.Get<Robot>("robot");
+            var table = status.Data;
+            var data = table[robot.Id];
+
+            Assert.Equal(result_orientation.ToEnum<Orientation>(), data.Bearing.Orientation);
+        }
 
 
 

@@ -24,6 +24,7 @@ namespace ToyRobot.Model
     public class Table
     {
         private readonly Dictionary<Guid, Data> data;
+
         private readonly int height;
         private readonly int width;
 
@@ -88,6 +89,24 @@ namespace ToyRobot.Model
             {
                 Robot = robot,
                 Bearing = bearing
+            };
+
+            return Status<Table>.Ok(this);
+        }
+
+        /// <summary>Turns the specified <paramref name="robot"/>.</summary>
+        /// <param name="robot">The robot.</param>
+        /// <param name="bearing">The bearing.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<Table> Turn(Robot robot, Direction direction)
+        {
+            var data = this.data[robot.Id];
+            var newBearing = data.Bearing.Turn(direction);
+
+            this.data[robot.Id] = new Data
+            {
+                Robot = robot,
+                Bearing = newBearing
             };
 
             return Status<Table>.Ok(this);

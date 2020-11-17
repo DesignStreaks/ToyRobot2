@@ -22,6 +22,29 @@ Scenario Outline: Add Robot to Table
 		| 9  | 2   | -1  | "North"     | "Ok"   | "Ok"    | "false"  |
 		| 10 | -10 | -10 | "North"     | "Ok"   | "Ok"    | "false"  |
 
+Scenario Outline: Report Robot Position
+	Given the robot exists
+	And I have a table of height 5 and width 5
+	When I place the robot at <x> and <y> facing <orientation>
+	And I Report the Robot Position
+	Then the report returns <report>
+
+	Examples:
+		| id | x   | y   | orientation | status | message | report      |
+		| 1  | 0   | 0   | "North"     | "Ok"   | "Ok"    | "0,0,North" |
+		| 2  | 0   | 4   | "North"     | "Ok"   | "Ok"    | "0,4,North" |
+		| 3  | 4   | 0   | "North"     | "Ok"   | "Ok"    | "4,0,North" |
+		| 4  | 2   | 2   | "North"     | "Ok"   | "Ok"    | "2,2,North" |
+		| 5  | 4   | 4   | "North"     | "Ok"   | "Ok"    | "4,4,North" |
+		| 6  | 2   | 2   | "South"     | "Ok"   | "Ok"    | "2,2,South" |
+		| 7  | 2   | 2   | "East"      | "Ok"   | "Ok"    | "2,2,East"  |
+		| 8  | 2   | 2   | "West"      | "Ok"   | "Ok"    | "2,2,West"  |
+		| 9  | 0   | 5   | "North"     | "Ok"   | "Ok"    | ""          |
+		| 10 | 5   | 0   | "North"     | "Ok"   | "Ok"    | ""          |
+		| 11 | -1  | 2   | "North"     | "Ok"   | "Ok"    | ""          |
+		| 12 | 2   | -1  | "North"     | "Ok"   | "Ok"    | ""          |
+		| 13 | -10 | -10 | "North"     | "Ok"   | "Ok"    | ""          |
+
 Scenario Outline: Move Robot around Table
 	Given the robot exists
 	And I have a table of height 5 and width 5
@@ -54,25 +77,22 @@ Scenario Outline: Move Robot around Table
 		| 4.4 | 0 | 2 | "West"      | "Ok"   | "Ok"    | "false"   | 0        | 2        |
 		| 4.5 | 2 | 2 | "West"      | "Ok"   | "Ok"    | "true"    | 1        | 2        |
 
-Scenario Outline: Report Robot Position
+Scenario Outline: Turn Robot around Table
 	Given the robot exists
 	And I have a table of height 5 and width 5
 	When I place the robot at <x> and <y> facing <orientation>
-	And I Report the Robot Position
-	Then the report returns <report>
+	And I turn the robot <direction>
+	Then the value of the status will be <status>
+	And the status will contain the message <message>
+	And the robot is on the table at <result_x> and <result_y> facing <result_orientation>
 
 	Examples:
-		| id | x   | y   | orientation | status | message | report      |
-		| 1  | 0   | 0   | "North"     | "Ok"   | "Ok"    | "0,0,North" |
-		| 2  | 0   | 4   | "North"     | "Ok"   | "Ok"    | "0,4,North" |
-		| 3  | 4   | 0   | "North"     | "Ok"   | "Ok"    | "4,0,North" |
-		| 4  | 2   | 2   | "North"     | "Ok"   | "Ok"    | "2,2,North" |
-		| 5  | 4   | 4   | "North"     | "Ok"   | "Ok"    | "4,4,North" |
-		| 6  | 2   | 2   | "South"     | "Ok"   | "Ok"    | "2,2,South" |
-		| 7  | 2   | 2   | "East"      | "Ok"   | "Ok"    | "2,2,East"  |
-		| 8  | 2   | 2   | "West"      | "Ok"   | "Ok"    | "2,2,West"  |
-		| 9  | 0   | 5   | "North"     | "Ok"   | "Ok"    | ""          |
-		| 10 | 5   | 0   | "North"     | "Ok"   | "Ok"    | ""          |
-		| 11 | -1  | 2   | "North"     | "Ok"   | "Ok"    | ""          |
-		| 12 | 2   | -1  | "North"     | "Ok"   | "Ok"    | ""          |
-		| 13 | -10 | -10 | "North"     | "Ok"   | "Ok"    | ""          |
+		| id | x | y | orientation | direction | status | message | result_x | result_y | result_orientation |
+		| 1  | 3 | 3 | "North"     | "Left"    | "Ok"   | "Ok"    | 3        | 3        | "West"             |
+		| 2  | 3 | 3 | "North"     | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "East"             |
+		| 3  | 3 | 3 | "South"     | "Left"    | "Ok"   | "Ok"    | 3        | 3        | "East"             |
+		| 4  | 3 | 3 | "South"     | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "West"             |
+		| 5  | 3 | 3 | "East"      | "Left"    | "Ok"   | "Ok"    | 3        | 3        | "North"            |
+		| 6  | 3 | 3 | "East"      | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "South"            |
+		| 7  | 3 | 3 | "West"      | "Left"    | "Ok"   | "Ok"    | 3        | 3        | "South"            |
+		| 8  | 3 | 3 | "West"      | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "North"            |

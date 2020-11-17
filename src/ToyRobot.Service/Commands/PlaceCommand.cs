@@ -22,8 +22,8 @@ namespace ToyRobot.Service.Commands
     using ToyRobot.Model;
 
     /// <summary>Command to place the robot on the table.</summary>
-    /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
-    /// <see cref="ToyRobot.Service.Commands.ICommand" />
+    /// <seealso cref="ToyRobot.Service.Commands.ICommand{ToyRobot.Model.Table}" />
+    /// Implements the <see cref="ToyRobot.Service.Commands.ICommand{ToyRobot.Model.Table}" />
     public class PlaceCommand : ICommand<Table>
     {
         private readonly Robot robot;

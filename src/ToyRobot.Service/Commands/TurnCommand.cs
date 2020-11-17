@@ -21,18 +21,21 @@ namespace ToyRobot.Service.Commands
     using System;
     using ToyRobot.Model;
 
-    /// <summary>Command to move the contents of a table cell.</summary>
+    /// <summary>Class TurnCommand.</summary>
     /// <seealso cref="ToyRobot.Service.Commands.ICommand{ToyRobot.Model.Table}" />
     /// Implements the <see cref="ToyRobot.Service.Commands.ICommand{ToyRobot.Model.Table}" />
-    public class MoveCommand : ICommand<Table>
+    public class TurnCommand : ICommand<Table>
     {
+        private readonly Direction direction;
         private readonly Robot robot;
 
-        /// <summary>Initializes a new instance of the <see cref="MoveCommand"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="MoveCommand" /> class.</summary>
         /// <param name="robot">The robot to execute the command for.</param>
-        public MoveCommand(Robot robot)
+        /// <param name="direction">The direction to turn the robot.</param>
+        public TurnCommand(Robot robot, Direction direction)
         {
             this.robot = robot;
+            this.direction = direction;
         }
 
         /// <summary>Executes the command on the table.</summary>
@@ -40,7 +43,6 @@ namespace ToyRobot.Service.Commands
         /// <returns>The status of the command execution along with the updated table.</returns>
         public Status<Table> Execute(Table table)
         {
-
             if (table is null)
                 return Status<Table>.Error("Table not defined", table);
 
@@ -49,7 +51,7 @@ namespace ToyRobot.Service.Commands
 
             var newTable = table.Copy();
 
-            var status = newTable.Move(robot);
+            var status = newTable.Turn(robot, direction);
 
             return status
                 ? Status<Table>.Ok(status.Data)

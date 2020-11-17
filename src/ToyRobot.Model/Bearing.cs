@@ -39,5 +39,38 @@ namespace ToyRobot.Model
                 _ => this.Copy()
             };
         }
+
+        /// <summary>Returns a new Bearing with the Orientation re-aligned 90° left or right.</summary>
+        public Bearing Turn(Direction direction)
+        {
+            return Orientation switch
+            {
+                Orientation.North => this with
+                {
+                    Orientation = direction == Direction.Left
+                        ? Orientation.West
+                        : Orientation.East
+                },
+                Orientation.South => this with
+                {
+                    Orientation = direction == Direction.Left
+                        ? Orientation.East
+                        : Orientation.West
+                },
+                Orientation.East => this with
+                {
+                    Orientation = direction == Direction.Left
+                        ? Orientation.North
+                        : Orientation.South
+                },
+                Orientation.West => this with
+                {
+                    Orientation = direction == Direction.Left
+                        ? Orientation.South
+                        : Orientation.North
+                },
+                _ => this.Copy()
+            };
+        }
     }
 }

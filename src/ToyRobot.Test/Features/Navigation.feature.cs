@@ -154,6 +154,73 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableTheoryAttribute(DisplayName="Report Robot Position")]
+        [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
+        [Xunit.TraitAttribute("Description", "Report Robot Position")]
+        [Xunit.InlineDataAttribute("1", "0", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"0,0,North\"", new string[0])]
+        [Xunit.InlineDataAttribute("2", "0", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"0,4,North\"", new string[0])]
+        [Xunit.InlineDataAttribute("3", "4", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"4,0,North\"", new string[0])]
+        [Xunit.InlineDataAttribute("4", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"2,2,North\"", new string[0])]
+        [Xunit.InlineDataAttribute("5", "4", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"4,4,North\"", new string[0])]
+        [Xunit.InlineDataAttribute("6", "2", "2", "\"South\"", "\"Ok\"", "\"Ok\"", "\"2,2,South\"", new string[0])]
+        [Xunit.InlineDataAttribute("7", "2", "2", "\"East\"", "\"Ok\"", "\"Ok\"", "\"2,2,East\"", new string[0])]
+        [Xunit.InlineDataAttribute("8", "2", "2", "\"West\"", "\"Ok\"", "\"Ok\"", "\"2,2,West\"", new string[0])]
+        [Xunit.InlineDataAttribute("9", "0", "5", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
+        [Xunit.InlineDataAttribute("10", "5", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
+        [Xunit.InlineDataAttribute("11", "-1", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
+        [Xunit.InlineDataAttribute("12", "2", "-1", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
+        [Xunit.InlineDataAttribute("13", "-10", "-10", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
+        public virtual void ReportRobotPosition(string id, string x, string y, string orientation, string status, string message, string report, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("id", id);
+            argumentsOfScenario.Add("x", x);
+            argumentsOfScenario.Add("y", y);
+            argumentsOfScenario.Add("orientation", orientation);
+            argumentsOfScenario.Add("status", status);
+            argumentsOfScenario.Add("message", message);
+            argumentsOfScenario.Add("report", report);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Report Robot Position", null, tagsOfScenario, argumentsOfScenario);
+#line 25
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 26
+ testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 27
+ testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 28
+ testRunner.When(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 29
+ testRunner.And("I Report the Robot Position", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.Then(string.Format("the report returns {0}", report), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [Xunit.SkippableTheoryAttribute(DisplayName="Move Robot around Table")]
         [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
         [Xunit.TraitAttribute("Description", "Move Robot around Table")]
@@ -191,7 +258,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("result_x", result_X);
             argumentsOfScenario.Add("result_y", result_Y);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Move Robot around Table", null, tagsOfScenario, argumentsOfScenario);
-#line 25
+#line 48
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -211,48 +278,43 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
+#line 49
  testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 27
+#line 50
  testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 28
+#line 51
  testRunner.When(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 29
+#line 52
  testRunner.And("I move the robot forward", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 30
+#line 53
  testRunner.Then(string.Format("the value of the status will be {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 31
+#line 54
  testRunner.And(string.Format("the status will contain the message {0}", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 32
+#line 55
  testRunner.And(string.Format("the robot {0} on the table to {1} and {2}", has_Moved, result_X, result_Y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Report Robot Position")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Turn Robot around Table")]
         [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
-        [Xunit.TraitAttribute("Description", "Report Robot Position")]
-        [Xunit.InlineDataAttribute("1", "0", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"0,0,North\"", new string[0])]
-        [Xunit.InlineDataAttribute("2", "0", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"0,4,North\"", new string[0])]
-        [Xunit.InlineDataAttribute("3", "4", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"4,0,North\"", new string[0])]
-        [Xunit.InlineDataAttribute("4", "2", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"2,2,North\"", new string[0])]
-        [Xunit.InlineDataAttribute("5", "4", "4", "\"North\"", "\"Ok\"", "\"Ok\"", "\"4,4,North\"", new string[0])]
-        [Xunit.InlineDataAttribute("6", "2", "2", "\"South\"", "\"Ok\"", "\"Ok\"", "\"2,2,South\"", new string[0])]
-        [Xunit.InlineDataAttribute("7", "2", "2", "\"East\"", "\"Ok\"", "\"Ok\"", "\"2,2,East\"", new string[0])]
-        [Xunit.InlineDataAttribute("8", "2", "2", "\"West\"", "\"Ok\"", "\"Ok\"", "\"2,2,West\"", new string[0])]
-        [Xunit.InlineDataAttribute("9", "0", "5", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
-        [Xunit.InlineDataAttribute("10", "5", "0", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
-        [Xunit.InlineDataAttribute("11", "-1", "2", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
-        [Xunit.InlineDataAttribute("12", "2", "-1", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
-        [Xunit.InlineDataAttribute("13", "-10", "-10", "\"North\"", "\"Ok\"", "\"Ok\"", "\"\"", new string[0])]
-        public virtual void ReportRobotPosition(string id, string x, string y, string orientation, string status, string message, string report, string[] exampleTags)
+        [Xunit.TraitAttribute("Description", "Turn Robot around Table")]
+        [Xunit.InlineDataAttribute("1", "3", "3", "\"North\"", "\"Left\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"West\"", new string[0])]
+        [Xunit.InlineDataAttribute("2", "3", "3", "\"North\"", "\"Right\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"East\"", new string[0])]
+        [Xunit.InlineDataAttribute("3", "3", "3", "\"South\"", "\"Left\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"East\"", new string[0])]
+        [Xunit.InlineDataAttribute("4", "3", "3", "\"South\"", "\"Right\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"West\"", new string[0])]
+        [Xunit.InlineDataAttribute("5", "3", "3", "\"East\"", "\"Left\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"North\"", new string[0])]
+        [Xunit.InlineDataAttribute("6", "3", "3", "\"East\"", "\"Right\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"South\"", new string[0])]
+        [Xunit.InlineDataAttribute("7", "3", "3", "\"West\"", "\"Left\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"South\"", new string[0])]
+        [Xunit.InlineDataAttribute("8", "3", "3", "\"West\"", "\"Right\"", "\"Ok\"", "\"Ok\"", "3", "3", "\"North\"", new string[0])]
+        public virtual void TurnRobotAroundTable(string id, string x, string y, string orientation, string direction, string status, string message, string result_X, string result_Y, string result_Orientation, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -260,11 +322,14 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("x", x);
             argumentsOfScenario.Add("y", y);
             argumentsOfScenario.Add("orientation", orientation);
+            argumentsOfScenario.Add("direction", direction);
             argumentsOfScenario.Add("status", status);
             argumentsOfScenario.Add("message", message);
-            argumentsOfScenario.Add("report", report);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Report Robot Position", null, tagsOfScenario, argumentsOfScenario);
-#line 57
+            argumentsOfScenario.Add("result_x", result_X);
+            argumentsOfScenario.Add("result_y", result_Y);
+            argumentsOfScenario.Add("result_orientation", result_Orientation);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Turn Robot around Table", null, tagsOfScenario, argumentsOfScenario);
+#line 80
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -284,20 +349,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 58
+#line 81
  testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 59
+#line 82
  testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 60
+#line 83
  testRunner.When(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 61
- testRunner.And("I Report the Robot Position", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+ testRunner.And(string.Format("I turn the robot {0}", direction), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 62
- testRunner.Then(string.Format("the report returns {0}", report), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 85
+ testRunner.Then(string.Format("the value of the status will be {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 86
+ testRunner.And(string.Format("the status will contain the message {0}", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 87
+ testRunner.And(string.Format("the robot is on the table at {0} and {1} facing {2}", result_X, result_Y, result_Orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

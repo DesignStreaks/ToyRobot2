@@ -22,8 +22,8 @@ namespace ToyRobot.Service.Commands
     using ToyRobot.Model;
 
     /// <summary>Command to report on the robot on the table.</summary>
-    /// <seealso cref="ToyRobot.Service.Commands.ICommand" />
-    /// <see cref="ToyRobot.Service.Commands.ICommand" />
+    /// <seealso cref="ToyRobot.Service.Commands.ICommand`1" />
+    /// Implements the <see cref="ToyRobot.Service.Commands.ICommand`1" />
     public class ReportCommand : ICommand<string>
     {
         private readonly Robot robot;
