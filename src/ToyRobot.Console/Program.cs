@@ -19,6 +19,7 @@
 namespace ToyRobot.Console
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using ToyRobot.Aspects;
@@ -33,11 +34,25 @@ namespace ToyRobot.Console
             InitialiseConsole();
             var commands = new ConsoleParser().GetCommands();
             var table = new Table(5, 5);
-            Console.CursorTop = 30;
-            Console.CursorLeft = 25;
-            new Processor(Console.Error).Process(table, commands);
+            TextWriter writer = new StringWriter();
+            new Processor(writer).Process(table, commands);
+
+            WriteOutput(writer);
 
             Console.ReadLine();
+        }
+
+        private static void WriteOutput(TextWriter writer)
+        {
+            Console.CursorTop = 30;
+            Console.CursorLeft = 25;
+            ConsoleEx.Write("Final Location", ConsoleColor.Cyan);
+            foreach (var line in writer.ToString().Split("\n"))
+            {
+                Console.CursorTop++;
+                Console.CursorLeft = 30;
+                ConsoleEx.Write(line, ConsoleColor.Blue);
+            }
         }
 
         private static void DrawHeader()
