@@ -7,4 +7,8 @@
     <Company>DesignStreaks</Company>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ToyRobot.CommandParser\ToyRobot.CommandParser.csproj" />
+  </ItemGroup>
+
 </Project>

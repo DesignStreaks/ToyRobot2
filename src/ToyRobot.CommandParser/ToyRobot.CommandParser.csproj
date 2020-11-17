@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToyRobot.Aspects\ToyRobot.Aspects.csproj" />
+    <ProjectReference Include="..\ToyRobot.Core\ToyRobot.Core.csproj" />
+    <ProjectReference Include="..\ToyRobot.Model\ToyRobot.Model.csproj" />
+    <ProjectReference Include="..\ToyRobot.Service\ToyRobot.Service.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -50,7 +50,7 @@ namespace ToyRobot.Service.Processors
             {
                 switch (command)
                 {
-                    case ReportCommand:
+                    case ICommand<string>:
                         var statusString = (command as ICommand<string>).Execute(newTable);
                         if (statusString)
                         {
@@ -60,7 +60,7 @@ namespace ToyRobot.Service.Processors
                         }
                         break;
 
-                    case PlaceCommand or MoveCommand or TurnCommand:
+                    case ICommand<Table>:
                         var statusTable = (command as ICommand<Table>).Execute(newTable);
                         if (statusTable)
                             newTable = statusTable.Data;

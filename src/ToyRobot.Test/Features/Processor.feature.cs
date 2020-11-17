@@ -250,7 +250,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "0,4,South"});
                 table2.AddRow(new string[] {
                             "6",
-                            "0,5,North"});
+                            "0,4,North"});
 #line 27
  testRunner.Then("the output contains <report>", ((string)(null)), table2, "Then ");
 #line hidden
