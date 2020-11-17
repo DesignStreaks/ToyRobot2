@@ -5,6 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>John Oliver</Authors>
     <Company>DesignStreaks</Company>
+    <Description>Toy Robot Coding Challenge - XPlor</Description>
+    <Copyright>Copyright © 2020 John Oliver</Copyright>
+    <PackageProjectUrl>https://github.com/DesignStreaks/ToyRobot2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DesignStreaks/ToyRobot2</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
