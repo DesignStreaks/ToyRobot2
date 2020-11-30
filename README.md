@@ -18,6 +18,7 @@ Create an application that can read in commands of the following form:
     MOVE
     LEFT
     RIGHT
+    BLOCK
     REPORT
 
 - PLACE will put the toy robot on the table in position X,Y and facing NORTH,
@@ -33,6 +34,8 @@ Create an application that can read in commands of the following form:
   without changing the position of the robot.
 - REPORT will announce the X,Y and F of the robot. This can be in any form,
   but standard output is sufficient.
+- BLOCK will render a position on the table as uninhabitable, preventing the 
+  robot from accessing that position.
 
 - A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT
   and REPORT commands.

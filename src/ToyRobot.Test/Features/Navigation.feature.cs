@@ -374,6 +374,69 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableTheoryAttribute(DisplayName="Robot Attempts to move onto blocked square")]
+        [Xunit.TraitAttribute("FeatureTitle", "Navigation")]
+        [Xunit.TraitAttribute("Description", "Robot Attempts to move onto blocked square")]
+        [Xunit.InlineDataAttribute("1", "3", "3", "\"North\"", "3", "4", "\"Ok\"", "\"Ok\"", "3", "3", "\"North\"", new string[0])]
+        [Xunit.InlineDataAttribute("2", "3", "3", "\"North\"", "3", "2", "\"Ok\"", "\"Ok\"", "3", "4", "\"North\"", new string[0])]
+        public virtual void RobotAttemptsToMoveOntoBlockedSquare(string id, string x, string y, string orientation, string blocked_X, string blocked_Y, string status, string message, string result_X, string result_Y, string result_Orientation, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("id", id);
+            argumentsOfScenario.Add("x", x);
+            argumentsOfScenario.Add("y", y);
+            argumentsOfScenario.Add("orientation", orientation);
+            argumentsOfScenario.Add("blocked_x", blocked_X);
+            argumentsOfScenario.Add("blocked_y", blocked_Y);
+            argumentsOfScenario.Add("status", status);
+            argumentsOfScenario.Add("message", message);
+            argumentsOfScenario.Add("result_x", result_X);
+            argumentsOfScenario.Add("result_y", result_Y);
+            argumentsOfScenario.Add("result_orientation", result_Orientation);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Robot Attempts to move onto blocked square", null, tagsOfScenario, argumentsOfScenario);
+#line 100
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 101
+ testRunner.Given("the robot exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 102
+ testRunner.And("I have a table of height 5 and width 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 103
+ testRunner.When(string.Format("I block the position {0} and {1}", blocked_X, blocked_Y), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 104
+ testRunner.And(string.Format("I place the robot at {0} and {1} facing {2}", x, y, orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 105
+ testRunner.And("I move the robot forward", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 106
+ testRunner.Then(string.Format("the robot is on the table at {0} and {1} facing {2}", result_X, result_Y, result_Orientation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

@@ -48,6 +48,13 @@ namespace ToyRobot.CommandParser
                     robot = new Robot();
                 }
 
+                if (userCommand == CommandTypes.Block)
+                {
+                    Console.CursorLeft = 3;
+                    var arguments = ConsoleEx.ReadInput("Enter Block Parameters (x, y):");
+                    userCommandString += $" {arguments}";
+                }
+
                 var commandArgs = ParseLine(userCommandString);
                 var command = CreateCommand(userCommand, commandArgs, robot);
 

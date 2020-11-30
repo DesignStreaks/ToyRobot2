@@ -16,6 +16,8 @@
  * from DesignStreaks.
  */
 
+using System.Linq;
+
 namespace ToyRobot.Model
 {
     using System;
@@ -25,6 +27,7 @@ namespace ToyRobot.Model
     {
         private readonly Dictionary<Guid, Data> data;
 
+        private List<Position> BlockedPositions;
         private readonly int height;
         private readonly int width;
 
@@ -34,6 +37,7 @@ namespace ToyRobot.Model
         public Table(int height, int width)
         {
             this.width = width;
+            BlockedPositions = new List<Position>();
             this.height = height;
 
             this.data = new Dictionary<Guid, Data>();
@@ -112,6 +116,18 @@ namespace ToyRobot.Model
             return Status<Table>.Ok(this);
         }
 
+        /// <summary>Blocks the specified position on the table so the robot cannot access it.</summary>
+        /// <param name="position">The position to block.</param>
+        /// <returns>The status of the command execution along with the updated table.</returns>
+        public Status<Table> Block(Position position)
+        {
+            if (!ValidatePosition(position))
+                return Status<Table>.Ok(this);
+
+            this.BlockedPositions.Add(position);
+            return Status<Table>.Ok(this);
+        }
+
         /// <summary>Ensure the position falls inside the table.</summary>
         /// <param name="position">The position.</param>
         /// <returns>Status.</returns>
@@ -122,6 +138,9 @@ namespace ToyRobot.Model
 
             if (position.Y < 0 || position.Y >= this.height)
                 return Status.Error("Index out of Bounds");
+
+            if (BlockedPositions.Any(p => p.X == position.X && p.Y == position.Y))
+                return Status.Error("Position blocked");
 
             return Status.Ok();
         }

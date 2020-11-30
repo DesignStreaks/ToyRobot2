@@ -180,6 +180,21 @@ namespace ToyRobot.Test.Steps
             this.scenarioContext.Set(status.Data, "table");
         }
 
+        
+        [When(@"I block the position (.*) and (.*)")]
+        public void WhenIBlockThePositionAnd(int blocked_x, int blocked_y)
+        {
+            var robot = scenarioContext.Get<Robot>("robot");
+            var table = scenarioContext.Get<Table>("table");
+            var status = new BlockCommand(new Position(blocked_x, blocked_y)).Execute(table);
+
+            this.scenarioContext.Set(status, "status");
+            this.scenarioContext.Set(status.Data, "table");
+        }
+
+
+
+
         [Then(@"the robot is on the table at (.*) and (.*) facing ""(.*)""")]
         public void ThenTheRobotIsOnTheTableAtAndFacing(int result_x, int result_y, string result_orientation)
         {
@@ -188,9 +203,10 @@ namespace ToyRobot.Test.Steps
             var table = status.Data;
             var data = table[robot.Id];
 
+            Assert.Equal(result_x, data.Bearing.Position.X);
+            Assert.Equal(result_y, data.Bearing.Position.Y);
             Assert.Equal(result_orientation.ToEnum<Orientation>(), data.Bearing.Orientation);
         }
-
 
 
 

@@ -96,3 +96,16 @@ Scenario Outline: Turn Robot around Table
 		| 6  | 3 | 3 | "East"      | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "South"            |
 		| 7  | 3 | 3 | "West"      | "Left"    | "Ok"   | "Ok"    | 3        | 3        | "South"            |
 		| 8  | 3 | 3 | "West"      | "Right"   | "Ok"   | "Ok"    | 3        | 3        | "North"            |
+
+Scenario Outline:  Robot Attempts to move onto blocked square
+	Given the robot exists
+	And I have a table of height 5 and width 5
+	When I block the position <blocked_x> and <blocked_y>
+	And I place the robot at <x> and <y> facing <orientation>
+	And I move the robot forward
+	Then the robot is on the table at <result_x> and <result_y> facing <result_orientation>
+
+	Examples:
+		| id | x | y | orientation | blocked_x | blocked_y | status | message | result_x | result_y | result_orientation |
+		| 1  | 3 | 3 | "North"     | 3         | 4         | "Ok"   | "Ok"    | 3        | 3        | "North"            |
+		| 2  | 3 | 3 | "North"     | 3         | 2         | "Ok"   | "Ok"    | 3        | 4        | "North"            |

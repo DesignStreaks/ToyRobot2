@@ -86,6 +86,7 @@ namespace ToyRobot.Console
                 ConsoleEx.WriteLine(3, " - Move", ConsoleColor.DarkYellow);
                 ConsoleEx.WriteLine(3, " - Left", ConsoleColor.DarkYellow);
                 ConsoleEx.WriteLine(3, " - Right", ConsoleColor.DarkYellow);
+                ConsoleEx.WriteLine(3, " - Block", ConsoleColor.DarkYellow);
                 ConsoleEx.WriteLine(3, " - Report", ConsoleColor.DarkYellow);
             }
             finally

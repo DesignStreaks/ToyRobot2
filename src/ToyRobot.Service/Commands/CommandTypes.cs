@@ -27,6 +27,7 @@ namespace ToyRobot.Service.Commands
         Move = 0x2,
         Report = 0x4,
         Left = 0x8,
-        Right = 0x10
+        Right = 0x10,
+        Block = 0x20
     }
 }

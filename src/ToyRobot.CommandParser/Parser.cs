@@ -72,7 +72,14 @@ namespace ToyRobot.CommandParser
                         return new ReportCommand(robot);
 
                     break;
+
+                case CommandTypes.Block:
+                    if(ValidateBlockCommand(commandArgs, out var position))
+                        return new BlockCommand(position);
+
+                    break;
             }
+
 
             return null;
         }
@@ -129,11 +136,36 @@ namespace ToyRobot.CommandParser
                 : Status.Ok();
         }
 
+
         private static Status ValidateRightTurnCommand(string[] parts)
         {
             return (parts.Length != 1 && !string.IsNullOrWhiteSpace(string.Join("", parts, 1, parts.Length - 1)))
                 ? Status.Error("Right command invalid argument count")
                 : Status.Ok();
+        }
+
+        private static Status ValidateBlockCommand(string[] parts, out Position position)
+        {
+            position = null;
+
+            if (parts.Length == 1)
+                return Status.Error("Block command requires arguments");
+
+            // Some hocus-pocus to remove any possible superfluous white spaces around command parameters.
+            var arguments = string.Join("", parts.Skip(1).Where(i => !string.IsNullOrWhiteSpace(i))).Split(',');
+
+            if (arguments.Length != 2)
+                return Status.Error("Place command requires 2 arguments");
+
+            if (!int.TryParse(arguments[0], out int x))
+                return Status.Error("Place command invalid 'x' argument");
+
+            if (!int.TryParse(arguments[1], out int y))
+                return Status.Error("Place command invalid 'y' argument");
+
+            position = new Position(x, y);
+
+            return Status.Ok();
         }
     }
 }
